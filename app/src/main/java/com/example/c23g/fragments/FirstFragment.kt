@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.c23g.R
 import com.example.c23g.databinding.FragmentFirstBinding
 
 class FirstFragment : Fragment() {
@@ -18,7 +20,7 @@ class FirstFragment : Fragment() {
     ): View {
         _binding = FragmentFirstBinding.inflate(layoutInflater, container, false)
         binding.btnGo.setOnClickListener {
-
+            findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
         }
         return binding.root
     }
