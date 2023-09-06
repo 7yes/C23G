@@ -27,5 +27,10 @@
         android:id="@+id/nav_third"
         android:name="com.example.c23g.fragments.ThirdFragment"
         android:label="fragment_third"
-        tools:layout="@layout/fragment_third" />
+        tools:layout="@layout/fragment_third" >
+        <argument
+            android:name="nameV"
+            app:argType="string"
+            android:defaultValue="Guest" />
+    </fragment>
 </navigation>
