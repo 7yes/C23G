@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import com.example.c23g.R
 import com.example.c23g.databinding.FragmentLuckBinding
 import com.example.c23g.databinding.FragmentPalmistryBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PalmistryFragment : Fragment() {
     private var _binding: FragmentPalmistryBinding? = null
     private val binding get() = _binding!!
