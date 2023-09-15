@@ -2,4 +2,7 @@
     <string name="app_name">C23G</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="horoscope">horoscope</string>
+    <string name="luck">luck</string>
+    <string name="palmistry">palmistry</string>
 </resources>
