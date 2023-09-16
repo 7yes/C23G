@@ -11,11 +11,12 @@ class HoroscopeAdapter(private var horoscopeList: List<HoroscopeInfo> = emptyLis
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoroscopeViewHolder {
         return HoroscopeViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_horoscopp, parent, false)
-        )
-    }
+        ) }
     override fun getItemCount(): Int = horoscopeList.size
     override fun onBindViewHolder(holder: HoroscopeViewHolder, position: Int) {
-        val item = horoscopeList[position]
-        holder.bind(item)
+        holder.bind(horoscopeList[position])
     }
-}
+    fun updateList(newList: List<HoroscopeInfo>) {
+        horoscopeList =newList
+        notifyDataSetChanged()
+    } }
