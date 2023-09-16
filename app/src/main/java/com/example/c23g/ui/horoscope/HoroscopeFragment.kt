@@ -1,10 +1,10 @@
 package com.example.c23g.ui.horoscope
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -45,7 +45,8 @@ class HoroscopeFragment : Fragment() {
 
     private fun initRV() {
         horoscopeAdapter = HoroscopeAdapter {
-            Toast.makeText(context, "dd $it", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(context, "", Toast.LENGTH_SHORT).show()
+            Log.d("TAG", "horoscope Frag in initRV  $it ")
         }
         binding.rvHoroscope.layoutManager = GridLayoutManager(requireContext(),2)
         binding.rvHoroscope.adapter = horoscopeAdapter
@@ -55,6 +56,7 @@ class HoroscopeFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 horoscopeViewModel.horoscope.collect {
+                    //carga y actualiza cambio en la lista de signos
                     horoscopeAdapter.updateList(it)
                 }
             }
