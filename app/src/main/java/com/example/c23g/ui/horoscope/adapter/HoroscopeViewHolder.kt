@@ -7,9 +7,10 @@ import com.example.c23g.domain.model.HoroscopeInfo
 
 class HoroscopeViewHolder(view:View):RecyclerView.ViewHolder(view) {
     private val binding = ItemHoroscoppBinding.bind(view)
-    fun bind(item: HoroscopeInfo) {
+    fun bind(item: HoroscopeInfo, onClickLis: (HoroscopeInfo) -> Unit) {
         val context = binding.tvTitle.context
         binding.ivHoroscope.setImageResource(item.img)
         binding.tvTitle.text = context.getString(item.name)
+        itemView.setOnClickListener { onClickLis(item) }
     }
 }

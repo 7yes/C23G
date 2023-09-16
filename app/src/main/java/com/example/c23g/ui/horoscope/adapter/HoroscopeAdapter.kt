@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.c23g.R
 import com.example.c23g.domain.model.HoroscopeInfo
 
-class HoroscopeAdapter(private var horoscopeList: List<HoroscopeInfo> = emptyList()) :
+class HoroscopeAdapter(private var horoscopeList: List<HoroscopeInfo> = emptyList(),private var onClickLis:(HoroscopeInfo)->Unit) :
     RecyclerView.Adapter<HoroscopeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoroscopeViewHolder {
         return HoroscopeViewHolder(
@@ -14,7 +14,7 @@ class HoroscopeAdapter(private var horoscopeList: List<HoroscopeInfo> = emptyLis
         ) }
     override fun getItemCount(): Int = horoscopeList.size
     override fun onBindViewHolder(holder: HoroscopeViewHolder, position: Int) {
-        holder.bind(horoscopeList[position])
+        holder.bind(horoscopeList[position],onClickLis)
     }
     fun updateList(newList: List<HoroscopeInfo>) {
         horoscopeList =newList
