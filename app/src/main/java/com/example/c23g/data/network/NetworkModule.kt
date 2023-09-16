@@ -1,5 +1,6 @@
 package com.example.c23g.data.network
 
+import com.example.c23g.BuildConfig.BASE_URL
 import com.example.c23g.data.RepositoryImpl
 import com.example.c23g.data.network.core.interceptors.AuthInterceptor
 import com.example.c23g.domain.Repository
@@ -20,7 +21,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://newastro.vercel.app")
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
