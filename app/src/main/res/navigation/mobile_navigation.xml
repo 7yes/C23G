@@ -9,7 +9,11 @@
         android:id="@+id/horoscopeFragment"
         android:name="com.example.c23g.ui.horoscope.HoroscopeFragment"
         android:label="fragment_horoscope"
-        tools:layout="@layout/fragment_horoscope" />
+        tools:layout="@layout/fragment_horoscope" >
+        <action
+            android:id="@+id/action_horoscopeFragment_to_detailActivity"
+            app:destination="@id/detailActivity" />
+    </fragment>
     <fragment
         android:id="@+id/palmistryFragment"
         android:name="com.example.c23g.ui.palmistry.PalmistryFragment"
@@ -20,4 +24,13 @@
         android:name="com.example.c23g.ui.luck.LuckFragment"
         android:label="fragment_luck"
         tools:layout="@layout/fragment_luck" />
+    <activity
+        android:id="@+id/detailActivity"
+        android:name="com.example.c23g.ui.detail.DetailActivity"
+        android:label="activity_detail"
+        tools:layout="@layout/activity_detail" >
+        <argument
+            android:name="type"
+            app:argType="com.example.c23g.domain.model.HoroscopeModel" />
+    </activity>
 </navigation>

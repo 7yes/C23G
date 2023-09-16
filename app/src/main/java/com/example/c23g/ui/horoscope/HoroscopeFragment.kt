@@ -10,8 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.c23g.R
 import com.example.c23g.databinding.FragmentHoroscopeBinding
+import com.example.c23g.domain.model.HoroscopeInfo
+import com.example.c23g.domain.model.HoroscopeModel
 import com.example.c23g.ui.horoscope.adapter.HoroscopeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -44,10 +48,34 @@ class HoroscopeFragment : Fragment() {
     }
 
     private fun initRV() {
-        horoscopeAdapter = HoroscopeAdapter {
-           // Toast.makeText(context, "", Toast.LENGTH_SHORT).show()
+//        horoscopeAdapter = HoroscopeAdapter {
+//            // Toast.makeText(context, "", Toast.LENGTH_SHORT).show()
+//            Log.d("TAG", "horoscope Frag in initRV  $it ")
+//            //findNavController().navigate(R.id.action_horoscopeFragment_to_detailActivity)
+//            findNavController().navigate(HoroscopeFragmentDirections.actionHoroscopeFragmentToDetailActivity())
+//        }
+
+        horoscopeAdapter = HoroscopeAdapter( onClickLis = {
+            val type = when(it){
+                HoroscopeInfo.Aquarius -> HoroscopeModel.Aquarius
+                HoroscopeInfo.Aries -> HoroscopeModel.Aries
+                HoroscopeInfo.Cancer -> HoroscopeModel.Cancer
+                HoroscopeInfo.Capricorn -> HoroscopeModel.Capricorn
+                HoroscopeInfo.Gemini -> HoroscopeModel.Gemini
+                HoroscopeInfo.Leo -> HoroscopeModel.Leo
+                HoroscopeInfo.Libra -> HoroscopeModel.Libra
+                HoroscopeInfo.Pisces -> HoroscopeModel.Pisces
+                HoroscopeInfo.Sagittarius -> HoroscopeModel.Sagittarius
+                HoroscopeInfo.Scorpio -> HoroscopeModel.Scorpio
+                HoroscopeInfo.Taurus -> HoroscopeModel.Taurus
+                HoroscopeInfo.Virgo -> HoroscopeModel.Virgo
+            }
             Log.d("TAG", "horoscope Frag in initRV  $it ")
-        }
+           // findNavController().navigate(R.id.action_horoscopeFragment_to_detailActivity)
+            findNavController().navigate(HoroscopeFragmentDirections.actionHoroscopeFragmentToDetailActivity(type))
+        })
+
+
         binding.rvHoroscope.layoutManager = GridLayoutManager(requireContext(),2)
         binding.rvHoroscope.adapter = horoscopeAdapter
     }

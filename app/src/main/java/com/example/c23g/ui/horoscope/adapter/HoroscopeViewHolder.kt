@@ -13,8 +13,8 @@ class HoroscopeViewHolder(view:View):RecyclerView.ViewHolder(view) {
         val context = binding.tvTitle.context
         binding.ivHoroscope.setImageResource(item.img)
         binding.tvTitle.text = context.getString(item.name)
-        // itemView.setOnClickListener { onClickLis(item) }
-        startRotationAnimation(binding.ivHoroscope, newLambda = {onClickLis(item)} )
+        itemView.setOnClickListener { onClickLis(item) }
+       // startRotationAnimation(binding.ivHoroscope, newLambda = {onClickLis(item)} )
     }
 }
 private fun startRotationAnimation(view:View, newLambda:()->Unit){
