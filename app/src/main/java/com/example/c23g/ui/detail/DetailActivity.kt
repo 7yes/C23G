@@ -8,7 +8,20 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.navArgs
+import com.example.c23g.R
 import com.example.c23g.databinding.ActivityDetailBinding
+import com.example.c23g.domain.model.HoroscopeModel.Aquarius
+import com.example.c23g.domain.model.HoroscopeModel.Aries
+import com.example.c23g.domain.model.HoroscopeModel.Cancer
+import com.example.c23g.domain.model.HoroscopeModel.Capricorn
+import com.example.c23g.domain.model.HoroscopeModel.Gemini
+import com.example.c23g.domain.model.HoroscopeModel.Leo
+import com.example.c23g.domain.model.HoroscopeModel.Libra
+import com.example.c23g.domain.model.HoroscopeModel.Pisces
+import com.example.c23g.domain.model.HoroscopeModel.Sagittarius
+import com.example.c23g.domain.model.HoroscopeModel.Scorpio
+import com.example.c23g.domain.model.HoroscopeModel.Taurus
+import com.example.c23g.domain.model.HoroscopeModel.Virgo
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -21,12 +34,17 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         intiUI()
-        detailViewModel.getHoroscope(args.type.name)
+        detailViewModel.getHoroscope(args.type)
         setContentView(binding.root)
     }
 
     private fun intiUI() {
+        initListeners()
         initUIState()
+    }
+
+    private fun initListeners() {
+        binding.ivBack.setOnClickListener { onBackPressed() }
     }
 
     private fun initUIState() {
@@ -48,23 +66,23 @@ class DetailActivity : AppCompatActivity() {
         binding.tvTitle.text = state.sing
         binding.tvBody.text = state.prediction
 
-//        val image = when (state.data) {
-//            Aries -> R.drawable.detail_aries
-//            Taurus -> R.drawable.detail_taurus
-//            Gemini -> R.drawable.detail_gemini
-//            Cancer -> R.drawable.detail_cancer
-//            Leo -> R.drawable.detail_leo
-//            Virgo -> R.drawable.detail_virgo
-//            Libra -> R.drawable.detail_libra
-//            Scorpio -> R.drawable.detail_scorpio
-//            Sagittarius -> R.drawable.detail_sagittarius
-//            Capricorn -> R.drawable.detail_capricorn
-//            Aquarius -> R.drawable.detail_aquarius
-//            Pisces -> R.drawable.detail_pisces
-//        }
 
-   //     binding.ivDetail.setImageResource(image)
+        val image = when (state.horoscopeModel) {
+            Aries -> R.drawable.aries
+            Taurus -> R.drawable.tauro
+            Gemini -> R.drawable.geminis
+            Cancer -> R.drawable.cancer
+            Leo -> R.drawable.leo
+            Virgo -> R.drawable.virgo
+            Libra -> R.drawable.libra
+            Scorpio -> R.drawable.escorpio
+            Sagittarius -> R.drawable.sagitario
+            Capricorn -> R.drawable.capricornio
+            Aquarius -> R.drawable.aquario
+            Pisces -> R.drawable.piscis
+        }
 
+        binding.ivDetail.setImageResource(image)
     }
 
     private fun loadingState() {
