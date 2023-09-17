@@ -3,7 +3,7 @@ package com.example.c23g.data.network.motherobjet
 import com.example.c23g.data.network.model.PredictionResponse
 import com.example.c23g.domain.model.HoroscopeInfo
 
-class HoroscopeMotherObject {
+object HoroscopeMotherObject {
     val anyResponse = PredictionResponse("date", "prediction", "taurus")
 
     val horoscopeInfoList = listOf(
