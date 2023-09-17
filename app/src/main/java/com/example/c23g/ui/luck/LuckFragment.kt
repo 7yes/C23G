@@ -1,6 +1,7 @@
 package com.example.c23g.ui.luck
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +26,7 @@ class LuckFragment : Fragment() {
     private val binding get() = _binding!!
 
     @Inject
-    lateinit var  randomCardProvider: RandomCardProvider
+    lateinit var randomCardProvider: RandomCardProvider
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,9 +48,22 @@ class LuckFragment : Fragment() {
     }
 
     private fun preparePrediction() {
-       val luck = randomCardProvider.getRandomLucky()
-        binding.tvLucky.text = getString(luck.text)
+        val luck = randomCardProvider.getRandomLucky()
+        val currentPrediction = getString(luck.text)
+        binding.tvLucky.text = currentPrediction
         binding.ivLuckyCard.setImageResource(luck.image)
+        binding.tvShare.setOnClickListener { shareResult(currentPrediction) }
+    }
+
+    private fun shareResult(prediction: String) {
+        val intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, prediction)
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TITLE, "Te depara")
+        }
+        val shareIntent = Intent.createChooser(intent, null)
+        startActivity(shareIntent)
     }
 
     private fun initListeners() {
@@ -74,9 +88,13 @@ class LuckFragment : Fragment() {
         slideUpAnimation.setAnimationListener(object : Animation.AnimationListener {
 
             override fun onAnimationStart(p0: Animation?) {
-                binding.reverse.isVisible = true } // el view debe empezar con visibility="invisible"
+                binding.reverse.isVisible = true
+            } // el view debe empezar con visibility="invisible"
+
             override fun onAnimationEnd(p0: Animation?) {
-                growCard() }
+                growCard()
+            }
+
             override fun onAnimationRepeat(p0: Animation?) {}
         })
         binding.reverse.startAnimation(slideUpAnimation)
@@ -85,7 +103,7 @@ class LuckFragment : Fragment() {
     private fun growCard() {
         val growAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.grow)
 
-        growAnimation.setAnimationListener(object : Animation.AnimationListener{
+        growAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation?) {
             }
 
@@ -108,12 +126,13 @@ class LuckFragment : Fragment() {
         val appearAnimation = AlphaAnimation(0.0f, 1.0f)
         appearAnimation.duration = 1000
 
-        disappearAnimation.setAnimationListener(object : Animation.AnimationListener{
+        disappearAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(p0: Animation?) {}
             override fun onAnimationEnd(p0: Animation?) {
                 binding.preview.isVisible = false
                 binding.prediction.isVisible = true
             }
+
             override fun onAnimationRepeat(p0: Animation?) {}
         })
         binding.preview.startAnimation(disappearAnimation)
