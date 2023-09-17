@@ -1,6 +1,7 @@
 package com.example.c23g.ui.luck
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.c23g.R
 import com.example.c23g.databinding.FragmentLuckBinding
+import com.example.c23g.ui.core.listners.OnSwipeTouchListener
 import com.example.c23g.ui.providers.RandomCardProvider
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Random
@@ -65,9 +67,21 @@ class LuckFragment : Fragment() {
         val shareIntent = Intent.createChooser(intent, null)
         startActivity(shareIntent)
     }
-
+    @SuppressLint("ClickableViewAccessibility")
     private fun initListeners() {
-        binding.ivRoulette.setOnClickListener { spinRoulette() }
+      //  binding.ivRoulette.setOnClickListener { spinRoulette() }
+
+        binding.ivRoulette.setOnTouchListener(object : OnSwipeTouchListener(requireContext()){
+
+            override fun onSwipeRight() {
+                spinRoulette()
+            }
+
+            override fun onSwipeLeft() {
+                spinRoulette()
+            }
+        })
+
     }
 
     private fun spinRoulette() { // se hace con el ObjectAnimator que ya eso existe
